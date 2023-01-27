@@ -1,9 +1,11 @@
-import dayjs from 'dayjs'
 import { format } from 'date-fns';
 import md5 from 'md5'
 import http from '@/utils/http'
 import { encode } from 'js-base64'
 import { NextApiRequest, NextApiResponse } from 'next'
+import { withIronSessionApiRoute } from "iron-session/next";
+
+
 /**
  * api路由 http://localhost:3000/api/user/sendVerifyCode
  * @param req
@@ -29,6 +31,7 @@ export default async function sendVerifyCode(
   const verifyCode = Math.floor(Math.random() * (9999 - 1000)) + 1000
   // 过期时间 5分钟
   const expireMinute = '5'
+  // 发送请求，获取短信验证码
   const res = await http.post(
     url,
     {
