@@ -11,6 +11,8 @@ import {
 import { useState } from 'react'
 import CountDown from '../CountDown'
 import http from 'utils/http'
+import api from '@/utils/api'
+
 interface Props {
   isShow: boolean
   handleClose: () => void
@@ -30,7 +32,9 @@ const Login = ({ isShow, handleClose }: Props) => {
    * 登录
    */
   const handleLogin = () => {
-    console.log(form)
+    http.post(api.login, form).then((res) => {
+      console.log(res)
+    })
   }
   /**
    * 获取验证码
@@ -49,7 +53,6 @@ const Login = ({ isShow, handleClose }: Props) => {
         setIsShowVerfifyCode(true)
         console.log(res)
       })
-    // if
     // setIsShowVerfifyCode(true)
   }
   /**
@@ -81,7 +84,7 @@ const Login = ({ isShow, handleClose }: Props) => {
           size="lg"
           labelPlaceholder="phone"
           type="text"
-          value='13739639096'
+          value="13739639096"
           onBlur={(e) => (form.phone = e.target.value)}
         />
         <Row align="center" justify="space-between">

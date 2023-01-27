@@ -6,6 +6,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { ironOption } from '@/config'
 import { ISession } from '@/utils'
+import { verifyOption } from '@/config'
 
 /**
  * ironSeesion 在内存中保存变量
@@ -20,10 +21,8 @@ export default withIronSessionApiRoute(sendVerifyCode, ironOption)
  */
 async function sendVerifyCode(req: NextApiRequest, response: NextApiResponse) {
   const session: ISession = req.session
+  const { AccountId, appId, AuthToken } = verifyOption
   const { to, templateId } = req.body
-  const AccountId = '2c94811c85c276590185f23ba4d902df'
-  const appId = '2c94811c85c276590185f23ba5b702e6'
-  const AuthToken = 'c172df8ed6474fcb80629d5d5e0d4911'
   const NowDate = format(new Date(), 'yyyyMMddHHmmss')
   // 生成SignParameter
   const SigParameter = md5(`${AccountId}${AuthToken}${NowDate}`).toUpperCase()
@@ -46,16 +45,18 @@ async function sendVerifyCode(req: NextApiRequest, response: NextApiResponse) {
     },
     { headers: { Authorization } }
   )
-  const { statusCode, statusMsg } = res
+  
+  const { statusCode, statusMsg, templateSMS } = res
   if (statusCode == '000000') {
     session.verifyCode = verifyCode
     // 保存session
     await session.save()
   }
+  console.log(verifyCode)
 
   response.status(200).json({
     code: statusCode,
     msg: statusMsg,
-    data: {},
+    data: { templateSMS },
   })
 }

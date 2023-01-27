@@ -7,3 +7,9 @@ export const ironOption = {
     secure: process.env.NODE_ENV === 'production',
   },
 }
+
+export const verifyOption = {
+  AccountId: process.env.AccountId,
+  appId: process.env.appId,
+  AuthToken: process.env.AuthToken,
+}
