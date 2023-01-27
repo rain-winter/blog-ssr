@@ -10,7 +10,6 @@ import {
 } from '@nextui-org/react'
 import { useState } from 'react'
 import CountDown from '../CountDown'
-import styles from './index.module.scss'
 import http from 'utils/http'
 interface Props {
   isShow: boolean
@@ -37,10 +36,19 @@ const Login = ({ isShow, handleClose }: Props) => {
    * 获取验证码
    */
   const handleVerifyCode = () => {
-    if (form.phone == '') alert('手机号不能为空')
-    http.post('/api/user/sendVerifyCode').then((res) => {
-      console.log(res)
-    })
+    if (form.phone == '') {
+      alert('手机号不能为空')
+      return
+    }
+    http
+      .post('/api/user/sendVerifyCode', {
+        to: form?.phone,
+        templateId: 1,
+      })
+      .then((res) => {
+        setIsShowVerfifyCode(true)
+        console.log(res)
+      })
     // if
     // setIsShowVerfifyCode(true)
   }
@@ -73,6 +81,7 @@ const Login = ({ isShow, handleClose }: Props) => {
           size="lg"
           labelPlaceholder="phone"
           type="text"
+          value='13739639096'
           onBlur={(e) => (form.phone = e.target.value)}
         />
         <Row align="center" justify="space-between">
