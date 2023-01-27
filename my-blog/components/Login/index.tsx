@@ -11,22 +11,44 @@ import {
 import { useState } from 'react'
 import CountDown from '../CountDown'
 import styles from './index.module.scss'
+import http from 'utils/http'
 interface Props {
   isShow: boolean
   handleClose: () => void
 }
 
 const Login = ({ isShow, handleClose }: Props) => {
+  const form = {
+    phone: '',
+    verify: '',
+  }
   const [isShowVerfifyCode, setIsShowVerfifyCode] = useState(false)
-  // Auth
+  /**
+   * Auth
+   */
   const handleOAuthGithub = () => {}
-  const handleLogin = () => {}
+  /**
+   * 登录
+   */
+  const handleLogin = () => {
+    console.log(form)
+  }
+  /**
+   * 获取验证码
+   */
   const handleVerifyCode = () => {
-    setIsShowVerfifyCode(true)
+    if (form.phone == '') alert('手机号不能为空')
+    http.post('/api/user/sendVerifyCode').then((res) => {
+      console.log(res)
+    })
+    // if
+    // setIsShowVerfifyCode(true)
   }
-  const countDownEnd = () => {
-    setIsShowVerfifyCode(false)
-  }
+  /**
+   * 倒计时结束 置为false
+   */
+  const countDownEnd = () => setIsShowVerfifyCode(false)
+  const phoneChange = (e: React.FocusEvent<HTMLInputElement>) => {}
   return isShow ? (
     <Modal
       closeButton
@@ -42,40 +64,40 @@ const Login = ({ isShow, handleClose }: Props) => {
           </Text>
         </Text>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body css={{ paddingTop: '26px' }}>
         <Input
           clearable
           bordered
           fullWidth
           color="primary"
           size="lg"
-          placeholder="Email"
+          labelPlaceholder="phone"
+          type="text"
+          onBlur={(e) => (form.phone = e.target.value)}
         />
         <Row align="center" justify="space-between">
           <Input
+            css={{ marginTop: '20px' }}
             clearable
             contentRightStyling={false}
             contentClickable={true}
             onContentClick={handleVerifyCode}
             bordered
             fullWidth
+            type="text"
             color="primary"
-            placeholder="Password"
+            labelPlaceholder="verify"
+            onBlur={(e) => (form.verify = e.target.value)}
             contentRight={
               isShowVerfifyCode ? (
                 <CountDown time={10} onEnd={countDownEnd} />
               ) : (
-                <Text css={{width:'40px'}} color="primary" size="$xs">
+                <Text css={{ width: '40px' }} color="primary" size="$xs">
                   验证码
                 </Text>
               )
             }
           />
-          {/* <Text
-            onClick={handleVerifyCode}
-            className={styles.text}
-            "
-          ></Text> */}
         </Row>
         <Row justify="space-between">
           <Checkbox>
@@ -96,7 +118,7 @@ const Login = ({ isShow, handleClose }: Props) => {
         </Row>
       </Modal.Body>
       <Modal.Footer>
-        <Button auto flat color="error">
+        <Button auto flat color="error" onPress={handleClose}>
           Close
         </Button>
         <Button auto onPress={handleLogin}>
