@@ -32,7 +32,7 @@ async function sendVerifyCode(req: NextApiRequest, response: NextApiResponse) {
   let url = `https://app.cloopen.com:8883/2013-12-26/Accounts/${AccountId}/SMS/TemplateSMS?sig=${SigParameter}`
   // 验证码
   const verifyCode = Math.floor(Math.random() * (9999 - 1000)) + 1000
-  // 过期时间 5分钟
+  // 短信验证码过期时间 5分钟
   const expireMinute = '5'
   // 发送请求，获取短信验证码
   const res: any = await http.post(
@@ -45,7 +45,7 @@ async function sendVerifyCode(req: NextApiRequest, response: NextApiResponse) {
     },
     { headers: { Authorization } }
   )
-  
+
   const { statusCode, statusMsg, templateSMS } = res
   if (statusCode == '000000') {
     session.verifyCode = verifyCode

@@ -5,9 +5,11 @@ import { encode } from 'js-base64'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { ironOption } from '@/config'
-import { ISession } from '@/utils'
 import Prisma from '@/utils/prisma'
 import { User } from '@prisma/client'
+import { Cookie } from 'next-cookie'
+import { ISession } from '@/utils'
+import { setCookie } from '@/utils/func'
 
 const prisma = new Prisma()
 
@@ -15,10 +17,13 @@ export default withIronSessionApiRoute(login, ironOption)
 
 async function login(req: NextApiRequest, response: NextApiResponse) {
   const session: ISession = req.session
+  // 获取cookie
+  const cookie = Cookie.fromApiRoute(req, response)
+
   const { phone, verify, identity_type = 'phone' } = req.body
-  console.log(phone, verify)
-  const users = await prisma.user.findMany()
-  console.log(users)
+
+  console.log('session.verifyCode', session.verifyCode)
+
   // 比对内存中的验证码和表单传过来的
   if (String(session.verifyCode) == String(verify)) {
     const userauth = await prisma.userAuth.findFirst({
@@ -37,7 +42,8 @@ async function login(req: NextApiRequest, response: NextApiResponse) {
       const user = userauth.User
       session.user = user
       await session.save()
-      
+      setCookie(cookie, user)
+
       response.status(200).json({
         code: 200,
         msg: '登录成功',
@@ -49,6 +55,7 @@ async function login(req: NextApiRequest, response: NextApiResponse) {
         data: {
           nickname: `用户_${Math.floor(Math.random() * 1000)}`,
           avatar: '/images/1.png',
+          // 同时创建 userauth表
           userAuths: {
             create: [
               {
@@ -61,6 +68,7 @@ async function login(req: NextApiRequest, response: NextApiResponse) {
         },
       })
       session.user = user
+      setCookie(cookie, user)
       await session.save()
 
       response.status(200).json({

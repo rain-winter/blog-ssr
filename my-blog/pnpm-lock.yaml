@@ -17,8 +17,11 @@ specifiers:
   iron-session: ^6.3.1
   js-base64: ^3.7.4
   md5: ^2.3.0
+  mobx: ^6.7.0
+  mobx-react-lite: ^3.4.0
   mockjs: ^1.1.0
   next: 13.1.5
+  next-cookie: ^2.8.0
   prisma: ^4.9.0
   react: 18.2.0
   react-dom: 18.2.0
@@ -42,8 +45,11 @@ dependencies:
   iron-session: 6.3.1_next@13.1.5
   js-base64: 3.7.4
   md5: 2.3.0
+  mobx: 6.7.0
+  mobx-react-lite: 3.4.0_jofyzmwkboewm6mjrhi25mngky
   mockjs: 1.1.0
   next: 13.1.5_3duxcpitbtplz62feflag7fwby
+  next-cookie: 2.8.0_next@13.1.5
   prisma: 4.9.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -1168,6 +1174,10 @@ packages:
     resolution: {integrity: sha512-v6LCdKfK6BwcqMo+wYW05rLS12S0ZO0Fl4w1h4aaZMD7bqT3gVUns6FvLJKGZHQmYn3SX55JWGpziwJRwVgutA==}
     dev: false
 
+  /@types/cookie/0.3.3:
+    resolution: {integrity: sha512-LKVP3cgXBT9RYj+t+9FDKwS5tdI+rPBXaNSkma7hvqy35lc7mAokC2zsqWJH0LaqIt3B962nuYI77hsJoT1gow==}
+    dev: false
+
   /@types/cookie/0.5.1:
     resolution: {integrity: sha512-COUnqfB2+ckwXXSFInsFdOAWQzCCx+a5hq2ruyj+Vjund94RJQd4LG2u9hnvJrTgunKAaax7ancBYlDrNYxA0g==}
     dev: false
@@ -1676,6 +1686,11 @@ packages:
 
   /concat-map/0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+
+  /cookie/0.4.2:
+    resolution: {integrity: sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==}
+    engines: {node: '>= 0.6'}
+    dev: false
 
   /cookie/0.5.0:
     resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
@@ -3029,6 +3044,28 @@ packages:
     resolution: {integrity: sha512-bzfL1YUZsP41gmu/qjrEk0Q6i2ix/cVeAhbCbqH9u3zYutS1cLg00qhrD0M2MVdCcx4Sc0UpP2eBWo9rotpq6g==}
     dev: false
 
+  /mobx-react-lite/3.4.0_jofyzmwkboewm6mjrhi25mngky:
+    resolution: {integrity: sha512-bRuZp3C0itgLKHu/VNxi66DN/XVkQG7xtoBVWxpvC5FhAqbOCP21+nPhULjnzEqd7xBMybp6KwytdUpZKEgpIQ==}
+    peerDependencies:
+      mobx: ^6.1.0
+      react: ^16.8.0 || ^17 || ^18
+      react-dom: '*'
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      mobx: 6.7.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /mobx/6.7.0:
+    resolution: {integrity: sha512-1kBLBdSNG2bA522HQdbsTvwAwYf9hq9FWxmlhX7wTsJUAI54907J+ozfGW+LoYUo06vjit748g6QH1AAGLNebw==}
+    dev: false
+
   /mockjs/1.1.0:
     resolution: {integrity: sha512-eQsKcWzIaZzEZ07NuEyO4Nw65g0hdWAyurVol1IPl1gahRwY+svqzfgfey8U8dahLwG44d6/RwEzuK52rSa/JQ==}
     hasBin: true
@@ -3050,6 +3087,15 @@ packages:
 
   /natural-compare/1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
+    dev: false
+
+  /next-cookie/2.8.0_next@13.1.5:
+    resolution: {integrity: sha512-wxDAqEcP6i5JRvpSIySm9tu7oSX/VGdkdsANyV2jryA5MpkSdT8rvJGp+qglSGT0AyQq4WPVBbR0nuVXLG+zcA==}
+    peerDependencies:
+      next: '>=10'
+    dependencies:
+      next: 13.1.5_3duxcpitbtplz62feflag7fwby
+      universal-cookie: 4.0.4
     dev: false
 
   /next/13.1.5_3duxcpitbtplz62feflag7fwby:
@@ -3962,6 +4008,13 @@ packages:
       has-bigints: 1.0.2
       has-symbols: 1.0.3
       which-boxed-primitive: 1.0.2
+    dev: false
+
+  /universal-cookie/4.0.4:
+    resolution: {integrity: sha512-lbRVHoOMtItjWbM7TwDLdl8wug7izB0tq3/YVKhT/ahB4VDvWMyvnADfnJI8y6fSvsjh51Ix7lTGC6Tn4rMPhw==}
+    dependencies:
+      '@types/cookie': 0.3.3
+      cookie: 0.4.2
     dev: false
 
   /uri-js/4.4.1:

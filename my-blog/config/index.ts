@@ -3,7 +3,7 @@ export const ironOption = {
   password: process.env.SESSION_COOKIE_PASSWORD as string,
   // secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
   cookieOptions: {
-    maxAge: 24 * 60 * 60,
+    maxAge: 24 * 60 * 60 * 1000, // 一天
     secure: process.env.NODE_ENV === 'production',
   },
 }
