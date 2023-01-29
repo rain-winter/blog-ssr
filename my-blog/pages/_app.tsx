@@ -41,7 +41,9 @@ App.getInitialProps = async ({ ctx }: { ctx: any }) => {
   const { TomasUser } = ctx.req.cookies
   return {
     initialValue: {
-      user: { userInfo: TomasUser },
+      user: {
+        userInfo: TomasUser || '{"id":null,"avatar":null,"nickname":null}',
+      },
     },
   }
 }

@@ -13,6 +13,7 @@ import CountDown from '../CountDown'
 import http from 'utils/http'
 import api from '@/utils/api'
 import { useStore } from '@/store'
+import { observer } from 'mobx-react-lite'
 
 interface Props {
   isShow: boolean
@@ -35,9 +36,8 @@ const Login = ({ isShow, handleClose }: Props) => {
    */
   const handleLogin = () => {
     http.post(api.login, { ...form, identity_type: 'phone' }).then((res) => {
-      console.log(res)
       store.user.setUserInfo(res.data.User)
-      console.log(store)
+      setIsShowVerfifyCode(false)
     })
   }
   /**
@@ -144,4 +144,4 @@ const Login = ({ isShow, handleClose }: Props) => {
     </Modal>
   ) : null
 }
-export default Login
+export default observer(Login)

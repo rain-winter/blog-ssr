@@ -1,5 +1,9 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import { Key } from 'react'
+
+type SelectionType = 'all' | Set<Key>
+
 import {
   Navbar as NextNavBar,
   Button,
@@ -7,6 +11,7 @@ import {
   Avatar,
   Dropdown,
   User,
+  useInput,
 } from '@nextui-org/react'
 // import Link from 'next/link'
 import { navs } from './config'
@@ -14,14 +19,19 @@ import styles from './index.module.scss'
 import Login from '../Login'
 import { useState } from 'react'
 import { useStore } from '@/store'
+import http from '@/utils/http'
+import api from '@/utils/api'
+import { observer } from 'mobx-react-lite'
 
 const Navbar: NextPage = () => {
   const store = useStore()
-  const userInfo = store.user.userInfo
+  let userInfo = store.user?.userInfo 
+
   const { id, avatar, nickname } = JSON.parse(userInfo)
 
   const { pathname, push } = useRouter()
   const [isShowLogin, setIsShowLogin] = useState(false)
+
   const handleLogin = () => {
     setIsShowLogin(true)
   }
@@ -30,11 +40,23 @@ const Navbar: NextPage = () => {
     setIsShowLogin(false)
   }
 
+  const logOut = async () => {
+    let res = await http.post(api.logout)
+    store.user.setUserInfo('{}')
+    console.log(res)
+  }
+  const homePage = () => {}
+
+  const handleDropDownAction = (key: Key) => {
+    if (key == 'logout') logOut()
+    if (key == 'homepage') homePage()
+  }
+
   return (
     <div className={styles.navbar}>
       <NextNavBar>
         <NextNavBar.Content variant="underline">
-          <Text b color="inherit" hideIn="xs">
+          <Text b color="inherit">
             RAIN
           </Text>
 
@@ -66,7 +88,11 @@ const Navbar: NextPage = () => {
                   src={avatar}
                 />
               </Dropdown.Trigger>
-              <Dropdown.Menu color="primary" aria-label="User Actions">
+              <Dropdown.Menu
+                color="primary"
+                aria-label="User Actions"
+                onAction={handleDropDownAction}
+              >
                 <Dropdown.Item key="profile" css={{ height: '$18' }}>
                   <Text b color="inherit" css={{ d: 'flex' }}>
                     {nickname}
@@ -75,12 +101,8 @@ const Navbar: NextPage = () => {
                     zoey@example.com
                   </Text>
                 </Dropdown.Item>
-                <Dropdown.Item key="settings" withDivider>
-                  My Settings
-                </Dropdown.Item>
-                <Dropdown.Item key="team_settings">Team Settings</Dropdown.Item>
-                <Dropdown.Item key="analytics" withDivider>
-                  Analytics
+                <Dropdown.Item key="homepage" withDivider>
+                  My Home Page
                 </Dropdown.Item>
                 <Dropdown.Item key="logout" color="error" withDivider>
                   Log Out
@@ -101,4 +123,4 @@ const Navbar: NextPage = () => {
 }
 
 // 这样导出才会默认指向 /
-export default Navbar
+export default observer(Navbar)
