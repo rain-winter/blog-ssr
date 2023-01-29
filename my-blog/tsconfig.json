@@ -19,6 +19,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/editor/icon/SendIcon.js", "pages/editor/icon/SendIcon.js"],
   "exclude": ["node_modules"]
 }

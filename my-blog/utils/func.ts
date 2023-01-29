@@ -9,3 +9,4 @@ export const setCookie = (cookies: any, params: unknown) => {
   const path = '/'
   cookies.set('TomasUser', JSON.stringify(params), { expires, path })
 }
+

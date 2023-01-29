@@ -13,7 +13,6 @@ import {
   User,
   useInput,
 } from '@nextui-org/react'
-// import Link from 'next/link'
 import { navs } from './config'
 import styles from './index.module.scss'
 import Login from '../Login'
@@ -46,7 +45,6 @@ const Navbar: NextPage = () => {
   const logOut = async () => {
     let res = await http.post(api.logout)
     store.user.setUserInfo('{}')
-    console.log(res)
   }
 
   // 去主页
@@ -55,7 +53,7 @@ const Navbar: NextPage = () => {
   }
   const goEditorPage = () => {
     if(id){
-      push('editor/new')
+      push('/editor/new')
     }else{
       alert('请登录')
     }

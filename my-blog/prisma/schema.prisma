@@ -17,11 +17,11 @@ datasource db {
 model Article {
   id        Int       @id @default(autoincrement())
   title     String
-  content   String?
-  views     String?
+  content   String?   @db.Text
+  views     Int?      @default(0) // 观看次数
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  is_delete Int       @default(1)
+  is_delete Int       @default(0) // 是否删除 0不删 1删除
   User      User?     @relation(fields: [userId], references: [id])
   userId    Int?
   tags      Tag[]

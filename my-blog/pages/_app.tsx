@@ -4,6 +4,7 @@ import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import Layout from '@/components/layout'
 import { StoreProvider } from '@/store'
+import { Container } from '@nextui-org/react'
 
 // 1. import `NextUIProvider` component
 import { NextUIProvider } from '@nextui-org/react'
@@ -23,14 +24,28 @@ export default function App<ReactWith>({
   pageProps,
 }: any) {
   // Use the layout defined at the page level, if available
+  const renderLayout = () => {
+    // * === 能出来
+    // 判断组件的layout 有就渲染header footer
+    console.log(typeof Component.layout)
+    if (Component.layout === null) {
+      return <Component {...pageProps} />
+    } else {
+      return (
+        // ts-ignore
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      )
+    }
+  }
 
   return (
     <StoreProvider initialValue={initialValue}>
       <NextUIProvider>
-        {/*  @ts-ignore*/}
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        {/* <Container fluid> */}
+        {renderLayout()}
+        {/* </Container> */}
       </NextUIProvider>
     </StoreProvider>
   )
@@ -38,11 +53,11 @@ export default function App<ReactWith>({
 
 App.getInitialProps = async ({ ctx }: { ctx: any }) => {
   // 从 cookie 中获取用户
-  const { TomasUser } = ctx.req.cookies
+  const { TomasUser } = ctx.req?.cookies || '{}'
   return {
     initialValue: {
       user: {
-        userInfo: TomasUser || '{}'
+        userInfo: TomasUser,
       },
     },
   }
