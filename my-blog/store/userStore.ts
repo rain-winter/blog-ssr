@@ -1,8 +1,10 @@
-export type IUserInfo = {
-  id?: number
-  nickname?: string
-  avatar?: string
-}  | any
+export type IUserInfo =
+  | {
+      id?: number
+      nickname?: string
+      avatar?: string
+    }
+  | any
 export interface IUserStore {
   userInfo: IUserInfo
   setUserInfo: (value: IUserInfo) => void
@@ -10,8 +12,7 @@ export interface IUserStore {
 
 const userStore = (): IUserStore => {
   return {
-    userInfo: {}
-    ,
+    userInfo: '{}',
     setUserInfo(value) {
       this.userInfo = value
     },

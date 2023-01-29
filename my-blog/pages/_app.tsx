@@ -42,7 +42,7 @@ App.getInitialProps = async ({ ctx }: { ctx: any }) => {
   return {
     initialValue: {
       user: {
-        userInfo: TomasUser || '{"id":null,"avatar":null,"nickname":null}',
+        userInfo: TomasUser || '{}'
       },
     },
   }

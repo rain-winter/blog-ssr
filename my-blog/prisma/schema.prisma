@@ -32,7 +32,7 @@ model UserAuth {
   id            Int    @id @default(autoincrement())
   identity_type String //登录方式 phone
   identifier    String
-  credential    Int
+  credential    String
   User          User?  @relation(fields: [userId], references: [id])
   userId        Int?
 }

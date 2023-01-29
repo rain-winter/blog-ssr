@@ -20,7 +20,9 @@ http.interceptors.response.use(
       }
     }
   },
-  (err) => Promise.reject(err)
+  (err) => {
+    console.log(err)
+  }
 )
 
 export default http

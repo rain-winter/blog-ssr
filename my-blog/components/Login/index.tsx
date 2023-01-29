@@ -14,6 +14,7 @@ import http from 'utils/http'
 import api from '@/utils/api'
 import { useStore } from '@/store'
 import { observer } from 'mobx-react-lite'
+import { oauthOptions, verifyOption } from '@/config'
 
 interface Props {
   isShow: boolean
@@ -28,14 +29,21 @@ const Login = ({ isShow, handleClose }: Props) => {
   }
   const [isShowVerfifyCode, setIsShowVerfifyCode] = useState(false)
   /**
-   * Auth
+   * Auth2.0
    */
-  const handleOAuthGithub = () => {}
+  const handleOAuthGithub = () => {
+    const githubClientID = oauthOptions.githubClientID
+    const redirectUri = `https://localhost:3000/api/oauth/redirect`
+    window.open(
+      `https://github.com/login/oauth/authorize?client_id=${githubClientID}`
+    )
+  }
   /**
    * 登录
    */
   const handleLogin = () => {
     http.post(api.login, { ...form, identity_type: 'phone' }).then((res) => {
+      console.log(res)
       store.user.setUserInfo(res.data.User)
       setIsShowVerfifyCode(false)
     })
@@ -57,7 +65,6 @@ const Login = ({ isShow, handleClose }: Props) => {
         setIsShowVerfifyCode(true)
         console.log(res)
       })
-    // setIsShowVerfifyCode(true)
   }
   /**
    * 倒计时结束 置为false
@@ -122,7 +129,7 @@ const Login = ({ isShow, handleClose }: Props) => {
           <Text size={14}>Forgot password?</Text>
         </Row>
         <Row>
-          <Text color="primary">使用GitHub登录</Text>
+          <Text color="primary" onClick={handleOAuthGithub}>使用GitHub登录</Text>
         </Row>
         <Row>
           <Text size="$xs">注册登录即表示同意</Text>

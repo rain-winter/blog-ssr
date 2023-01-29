@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { Key } from 'react'
+import { Key, useEffect } from 'react'
 
 type SelectionType = 'all' | Set<Key>
 
@@ -25,13 +25,16 @@ import { observer } from 'mobx-react-lite'
 
 const Navbar: NextPage = () => {
   const store = useStore()
-  let userInfo = store.user?.userInfo 
-
-  const { id, avatar, nickname } = JSON.parse(userInfo)
-
+  let { userInfo } = store.user
+  // let id, avatar, nickname
   const { pathname, push } = useRouter()
   const [isShowLogin, setIsShowLogin] = useState(false)
-
+  const {id, avatar, nickname} =JSON.parse(userInfo)
+  // useEffect(() => {
+  //   userInfo = 
+  //   id= userInfo.id
+  //   console.log(userInfo.id)
+  // }, [])
   const handleLogin = () => {
     setIsShowLogin(true)
   }
@@ -45,7 +48,18 @@ const Navbar: NextPage = () => {
     store.user.setUserInfo('{}')
     console.log(res)
   }
-  const homePage = () => {}
+
+  // 去主页
+  const homePage = () => {
+    push(`/user/${id}`)
+  }
+  const goEditorPage = () => {
+    if(id){
+      push('editor/new')
+    }else{
+      alert('请登录')
+    }
+  }
 
   const handleDropDownAction = (key: Key) => {
     if (key == 'logout') logOut()
@@ -72,7 +86,7 @@ const Navbar: NextPage = () => {
           ))}
         </NextNavBar.Content>
         <NextNavBar.Content>
-          <Button color="gradient" auto>
+          <Button color="gradient" auto onClick={goEditorPage}>
             写文章
           </Button>
           {id ? (

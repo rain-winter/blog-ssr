@@ -41,7 +41,7 @@ async function login(req: NextApiRequest, response: NextApiResponse) {
       // 存在了 保存到session
       const user = userauth.User
       session.user = user
-      await session.save()
+      session.save()
       setCookie(cookie, user)
 
       response.status(200).json({
@@ -49,6 +49,7 @@ async function login(req: NextApiRequest, response: NextApiResponse) {
         msg: '登录成功',
         data: userauth,
       })
+      
     } else {
       // 新用户，注册
       const user = await prisma.user.create({
@@ -61,7 +62,7 @@ async function login(req: NextApiRequest, response: NextApiResponse) {
               {
                 identifier: phone,
                 identity_type,
-                credential: session.verifyCode,
+                credential: String(session.verifyCode),
               },
             ],
           },
@@ -74,7 +75,7 @@ async function login(req: NextApiRequest, response: NextApiResponse) {
       response.status(200).json({
         code: 200,
         msg: '登录成功',
-        data: userauth,
+        data: user,
       })
     }
   } else {

@@ -9,7 +9,12 @@ export const ironOption = {
 }
 
 export const verifyOption = {
-  AccountId: process.env.AccountId,
-  appId: process.env.appId,
-  AuthToken: process.env.AuthToken,
+  AccountId: process.env.NEXT_PUBLIC_AccountId,
+  appId: process.env.NEXT_PUBLIC_AppId,
+  AuthToken: process.env.NEXT_PUBLIC_AuthToken,
+}
+
+export const oauthOptions = {
+  githubClientID: process.env.NEXT_PUBLIC_GithubClientID,
+  githubSecrect: process.env.NEXT_PUBLIC_GithubSecrect,
 }
