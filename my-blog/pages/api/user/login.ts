@@ -1,12 +1,7 @@
-import { format } from 'date-fns'
-import md5 from 'md5'
-import http from '@/utils/http'
-import { encode } from 'js-base64'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { ironOption } from '@/config'
 import Prisma from '@/utils/prisma'
-import { User } from '@prisma/client'
 import { Cookie } from 'next-cookie'
 import { ISession } from '@/utils'
 import { setCookie } from '@/utils/func'
@@ -35,13 +30,12 @@ async function login(req: NextApiRequest, response: NextApiResponse) {
         User: true,
       },
     })
-    console.log(userauth)
 
     if (userauth) {
       // 存在了 保存到session
       const user = userauth.User
       session.user = user
-      session.save()
+      await session.save() // 保存session
       setCookie(cookie, user)
 
       response.status(200).json({
@@ -49,7 +43,6 @@ async function login(req: NextApiRequest, response: NextApiResponse) {
         msg: '登录成功',
         data: userauth,
       })
-      
     } else {
       // 新用户，注册
       const user = await prisma.user.create({

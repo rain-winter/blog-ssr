@@ -15,6 +15,7 @@ import api from '@/utils/api'
 import { useStore } from '@/store'
 import { observer } from 'mobx-react-lite'
 import { oauthOptions, verifyOption } from '@/config'
+import { useRouter } from 'next/router'
 
 interface Props {
   isShow: boolean
@@ -23,6 +24,8 @@ interface Props {
 
 const Login = ({ isShow, handleClose }: Props) => {
   const store = useStore()
+  const router =useRouter()
+
   const form = {
     phone: '',
     verify: '',
@@ -46,6 +49,8 @@ const Login = ({ isShow, handleClose }: Props) => {
       console.log(res)
       store.user.setUserInfo(res.data.User)
       setIsShowVerfifyCode(false)
+      location.reload()
+      // router.replace('/')
     })
   }
   /**

@@ -27,7 +27,7 @@ export default function App<ReactWith>({
   const renderLayout = () => {
     // * === 能出来
     // 判断组件的layout 有就渲染header footer
-    console.log(typeof Component.layout)
+    // console.log(typeof Component.layout)
     if (Component.layout === null) {
       return <Component {...pageProps} />
     } else {
@@ -54,6 +54,7 @@ export default function App<ReactWith>({
 App.getInitialProps = async ({ ctx }: { ctx: any }) => {
   // 从 cookie 中获取用户
   const { TomasUser } = ctx.req?.cookies || '{}'
+  console.log(TomasUser)
   return {
     initialValue: {
       user: {

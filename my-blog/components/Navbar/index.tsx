@@ -25,15 +25,12 @@ import { observer } from 'mobx-react-lite'
 const Navbar: NextPage = () => {
   const store = useStore()
   let { userInfo } = store.user
+
   // let id, avatar, nickname
   const { pathname, push } = useRouter()
   const [isShowLogin, setIsShowLogin] = useState(false)
-  const {id, avatar, nickname} =JSON.parse(userInfo)
-  // useEffect(() => {
-  //   userInfo = 
-  //   id= userInfo.id
-  //   console.log(userInfo.id)
-  // }, [])
+  const { id, avatar, nickname } = JSON.parse(userInfo || '{}')
+  
   const handleLogin = () => {
     setIsShowLogin(true)
   }
@@ -52,9 +49,9 @@ const Navbar: NextPage = () => {
     push(`/user/${id}`)
   }
   const goEditorPage = () => {
-    if(id){
+    if (id) {
       push('/editor/new')
-    }else{
+    } else {
       alert('请登录')
     }
   }

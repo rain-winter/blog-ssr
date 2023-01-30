@@ -1,8 +1,41 @@
 import type { NextPage } from 'next'
+import Prisma from '@/utils/prisma'
+import ListItem from '@/components/ListItem'
+const prisma = new Prisma()
+/**
+ * ssr 给服务端渲染
+ * ssg 提前在编译时生成静态页面，不经过服务端 。动态元素太多就不适合 官网会用
+ * csr 客户端渲染（前端渲染）
+ * dynimic 路由
+ */
+interface IProps {
+  articles: []
+}
+/**
+ * ssr 渲染
+ */
 
-const Home: NextPage = () => {
-
-  return <div></div>
+export async function getServerSideProps() {
+  // 获取文章
+  let articls = await prisma.article.findMany({
+    include: {
+      User: true,
+    },
+  })
+  return {
+    props: {
+      articles: JSON.parse(JSON.stringify(articls)),
+    },
+  }
+}
+const Home = ({ articles }: IProps) => {
+  return (
+    <div>
+      {articles.map((article,index) => (
+        <ListItem key={index} article={article} />
+      ))}
+    </div>
+  )
 }
 
 // 这样导出才会默认指向 /

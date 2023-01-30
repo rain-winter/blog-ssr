@@ -34,6 +34,7 @@ async function sendVerifyCode(req: NextApiRequest, response: NextApiResponse) {
   const verifyCode = Math.floor(Math.random() * (9999 - 1000)) + 1000
   // 短信验证码过期时间 5分钟
   const expireMinute = '5'
+
   // 发送请求，获取短信验证码
   const res: any = await http.post(
     url,
@@ -45,18 +46,15 @@ async function sendVerifyCode(req: NextApiRequest, response: NextApiResponse) {
     },
     { headers: { Authorization } }
   )
-
-  const { statusCode, statusMsg, templateSMS } = res
-  if (statusCode == '000000') {
-    session.verifyCode = verifyCode
-    // 保存session
-    await session.save()
-  }
   console.log(verifyCode)
+  const { statusCode, statusMsg, templateSMS } = res
+  if (statusCode === '000000') {
+    session.verifyCode = verifyCode
+    await req.session.save()
+  }
 
   response.status(200).json({
-    code: statusCode,
+    code: 200,
     msg: statusMsg,
-    data: { templateSMS },
   })
 }
