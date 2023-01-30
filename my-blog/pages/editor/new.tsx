@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import '@uiw/react-md-editor/markdown-editor.css'
 import '@uiw/react-markdown-preview/markdown.css'
 import { useState } from 'react'
-import { Button, Input, Row } from '@nextui-org/react'
+import { Container, Input } from '@nextui-org/react'
 import { SendIcon } from './icon/SendIcon'
 import { SendButton } from './icon/SendButton'
 import http from '@/utils/http'
@@ -26,7 +26,7 @@ const NewEditor: { (): JSX.Element; layout: any } = () => {
   }
 
   return (
-    <div>
+    <Container fluid>
       <Input
         fullWidth
         clearable
@@ -48,8 +48,8 @@ const NewEditor: { (): JSX.Element; layout: any } = () => {
           </SendButton>
         }
       />
-      <MDEditor value={value} onChange={setValue} />
-    </div>
+      <MDEditor height={600}  value={value} onChange={setValue} />
+    </Container>
   )
 }
 // 配置为 null 不显示header footer 在_app里判断
