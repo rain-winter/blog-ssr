@@ -1,6 +1,6 @@
 import api from '@/utils/api'
 import http from '@/utils/http'
-import { Button, Container, Input } from '@nextui-org/react'
+import { Container, Input } from '@nextui-org/react'
 import '@uiw/react-markdown-preview/markdown.css'
 import '@uiw/react-md-editor/markdown-editor.css'
 import dynamic from 'next/dynamic'
@@ -21,7 +21,6 @@ const NewEditor: { (): JSX.Element; layout: any } = () => {
   const handlePublish = async () => {
     if (!title) {
       alert('标题为空')
-      return
     }
     let res = await http.post(api.publish, { title, content: value })
     console.log(res)
@@ -30,11 +29,6 @@ const NewEditor: { (): JSX.Element; layout: any } = () => {
 
   return (
     <Container fluid>
-      <Button flat color="primary" auto css={{
-        margin:'10px 0'
-      }}>
-        添加文章
-      </Button>
       <Input
         fullWidth
         clearable

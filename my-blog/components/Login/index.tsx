@@ -1,21 +1,15 @@
-import {
-  Navbar,
-  Link,
-  Modal,
-  Button,
-  Text,
-  Input,
-  Row,
-  Checkbox,
-} from '@nextui-org/react'
-import { useState } from 'react'
-import CountDown from '../CountDown'
-import http from 'utils/http'
-import api from '@/utils/api'
+import { oauthOptions } from '@/config'
 import { useStore } from '@/store'
+import api from '@/utils/api'
+import {
+  Button, Checkbox, Input, Link,
+  Modal, Row, Text
+} from '@nextui-org/react'
 import { observer } from 'mobx-react-lite'
-import { oauthOptions, verifyOption } from '@/config'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
+import http from 'utils/http'
+import CountDown from '../CountDown'
 
 interface Props {
   isShow: boolean
@@ -100,7 +94,6 @@ const Login = ({ isShow, handleClose }: Props) => {
           size="lg"
           labelPlaceholder="phone"
           type="text"
-          value="13739639096"
           onBlur={(e) => (form.phone = e.target.value)}
         />
         <Row align="center" justify="space-between">

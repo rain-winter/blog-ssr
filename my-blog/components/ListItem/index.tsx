@@ -1,7 +1,8 @@
-import { IArticle } from '@/utils'
-import { Card, Container, Row, Text, User } from '@nextui-org/react'
-import { formatDistanceToNow } from 'date-fns'
-import Link from 'next/link'
+import { IArticle } from '@/utils';
+import { Card, Container, Row, Text, User } from '@nextui-org/react';
+import { formatDistanceToNow } from 'date-fns';
+import { markdownToTxt } from 'markdown-to-txt';
+import Link from 'next/link';
 
 interface IProps {
   article: IArticle
@@ -26,7 +27,7 @@ const ListItem = (props: IProps) => {
                   whiteSpace: 'nowrap',
                 }}
               >
-                {article.content}
+               {markdownToTxt(article.content) }
               </Text>
               <User
                 src={article.User.avatar}

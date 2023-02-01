@@ -1,14 +1,13 @@
-import '@/styles/globals.css'
-import type { ReactElement, ReactNode } from 'react'
-import type { NextPage } from 'next'
-import type { AppProps } from 'next/app'
 import Layout from '@/components/layout'
 import { StoreProvider } from '@/store'
-import { Container } from '@nextui-org/react'
+import '@/styles/globals.css'
+
+import type { NextPage } from 'next'
+import type { AppProps } from 'next/app'
+import type { ReactElement, ReactNode } from 'react'
 
 // 1. import `NextUIProvider` component
 import { NextUIProvider } from '@nextui-org/react'
-import { useCookie } from 'next-cookie'
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode

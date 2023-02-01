@@ -1,26 +1,23 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { Key, useEffect } from 'react'
+import { Key } from 'react'
 
 type SelectionType = 'all' | Set<Key>
 
-import {
-  Navbar as NextNavBar,
-  Button,
-  Text,
-  Avatar,
-  Dropdown,
-  User,
-  useInput,
-} from '@nextui-org/react'
-import { navs } from './config'
-import styles from './index.module.scss'
-import Login from '../Login'
-import { useState } from 'react'
 import { useStore } from '@/store'
-import http from '@/utils/http'
 import api from '@/utils/api'
+import http from '@/utils/http'
+import {
+  Button,
+  Dropdown,
+  Navbar as NextNavBar,
+  Text,
+  User
+} from '@nextui-org/react'
 import { observer } from 'mobx-react-lite'
+import { useState } from 'react'
+import Login from '../Login'
+import { navs } from './config'
 
 const Navbar: NextPage = () => {
   const store = useStore()
@@ -30,7 +27,9 @@ const Navbar: NextPage = () => {
   const { pathname, push } = useRouter()
   const [isShowLogin, setIsShowLogin] = useState(false)
   const { id, avatar, nickname } = JSON.parse(userInfo || '{}')
-  
+  console.log('----------------')
+  console.log(avatar)
+
   const handleLogin = () => {
     setIsShowLogin(true)
   }
@@ -62,7 +61,7 @@ const Navbar: NextPage = () => {
   }
 
   return (
-    <div className={styles.navbar}>
+    <div>
       <NextNavBar>
         <NextNavBar.Content variant="underline">
           <Text b color="inherit">
@@ -88,13 +87,8 @@ const Navbar: NextPage = () => {
             <Dropdown placement="bottom-left">
               <Dropdown.Trigger>
                 <User
-                  bordered
-                  as="button"
-                  size="lg"
-                  color="primary"
-                  name={nickname}
-                  description="@tonyreichert"
                   src={avatar}
+                  name={nickname}
                 />
               </Dropdown.Trigger>
               <Dropdown.Menu

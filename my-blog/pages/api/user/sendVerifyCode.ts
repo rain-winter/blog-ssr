@@ -1,12 +1,10 @@
-import { format } from 'date-fns'
-import md5 from 'md5'
-import http from '@/utils/http'
-import { encode } from 'js-base64'
-import { NextApiRequest, NextApiResponse } from 'next'
-import { withIronSessionApiRoute } from 'iron-session/next'
-import { ironOption } from '@/config'
+import { ironOption, verifyOption } from '@/config'
 import { ISession } from '@/utils'
-import { verifyOption } from '@/config'
+import { format } from 'date-fns'
+import { withIronSessionApiRoute } from 'iron-session/next'
+import { encode } from 'js-base64'
+import md5 from 'md5'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 /**
  * ironSeesion 在内存中保存变量
@@ -36,25 +34,29 @@ async function sendVerifyCode(req: NextApiRequest, response: NextApiResponse) {
   const expireMinute = '5'
 
   // 发送请求，获取短信验证码
-  const res: any = await http.post(
-    url,
-    {
-      to,
-      appId,
-      templateId,
-      datas: [verifyCode, expireMinute],
-    },
-    { headers: { Authorization } }
-  )
+  // const res: any = await http.post(
+  //   url,
+  //   {
+  //     to,
+  //     appId,
+  //     templateId,
+  //     datas: [verifyCode, expireMinute],
+  //   },
+  //   { headers: { Authorization } }
+  // )
+  // console.log(verifyCode)
+  // const { statusCode, statusMsg, templateSMS } = res
+  // if (statusCode === '000000') {
+  //   session.verifyCode = verifyCode
+  //   await req.session.save()
+  // }
+
+  session.verifyCode = verifyCode
   console.log(verifyCode)
-  const { statusCode, statusMsg, templateSMS } = res
-  if (statusCode === '000000') {
-    session.verifyCode = verifyCode
-    await req.session.save()
-  }
+  await req.session.save()
 
   response.status(200).json({
     code: 200,
-    msg: statusMsg,
+    data: verifyCode,
   })
 }

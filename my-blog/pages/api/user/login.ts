@@ -17,6 +17,7 @@ async function login(req: NextApiRequest, response: NextApiResponse) {
 
   const { phone, verify, identity_type = 'phone' } = req.body
 
+  console.log(phone)
   console.log('session.verifyCode', session.verifyCode)
 
   // 比对内存中的验证码和表单传过来的
