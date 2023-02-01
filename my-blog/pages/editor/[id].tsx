@@ -1,5 +1,7 @@
+import { IArticle } from '@/utils'
 import api from '@/utils/api'
 import http from '@/utils/http'
+import Prisma from '@/utils/prisma'
 import { Container, Input } from '@nextui-org/react'
 import '@uiw/react-markdown-preview/markdown.css'
 import '@uiw/react-md-editor/markdown-editor.css'
@@ -8,23 +10,59 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { SendButton } from './icon/SendButton'
 import { SendIcon } from './icon/SendIcon'
+const prisma = new Prisma()
+
+interface IProps {
+  article: IArticle
+}
+/**
+ * SSR 渲染 控制台输出
+ * @param params 接受动态参数 params:{ id: 2 }
+ * @returns
+ */
+export async function getServerSideProps({ params }: { params: any }) {
+  // 获取文章
+  let article = await prisma.article.findFirst({
+    where: {
+      id: +params.id,
+    },
+    include: {
+      User: true,
+    },
+  })
+
+  //   返回个 props 在下面可以用
+  return {
+    props: {
+      article: JSON.parse(JSON.stringify(article)),
+    },
+  }
+}
 
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false })
 
-const NewEditor: { (): JSX.Element; layout: any } = () => {
-  const { push } = useRouter()
+const ModifyEditor: { ({ article }: IProps): JSX.Element; layout: any } = ({
+  article,
+}: IProps) => {
+  const { push, query } = useRouter()
+  const articleId = query.id
+  //  这里的id 是 articleId
+  // TODO 从query里拿到 {id: '1'}
   // 文章内容
-  const [value, setValue] = useState('**Hello world!!!**')
+  // TODO 直接赋值
+  const [value, setValue] = useState(article.content || 'hello')
   // 标题
-  const [title, setTitle] = useState('')
+  console.log(article.title)
+  const [title, setTitle] = useState(article.title || '')
   // 发布
-  const handlePublish = async () => {
+  const handleUpdate = async () => {
     if (!title) {
       alert('标题为空')
     }
-    let res = await http.post(api.publish, { title, content: value })
+
+    let res = await http.post(api.update, { articleId, title, content: value })
     console.log(res)
-    push('/')
+    articleId ? push(`/article/${articleId}`) : push('/')
   }
 
   return (
@@ -36,7 +74,8 @@ const NewEditor: { (): JSX.Element; layout: any } = () => {
         label="文章标题"
         placeholder="Type your title..."
         onChange={(e) => setTitle(e.target.value)}
-        onContentClick={handlePublish}
+        onContentClick={handleUpdate}
+        value={title}
         contentRight={
           <SendButton>
             <SendIcon
@@ -55,5 +94,5 @@ const NewEditor: { (): JSX.Element; layout: any } = () => {
   )
 }
 // 配置为 null 不显示header footer 在_app里判断
-NewEditor.layout = null
-export default NewEditor
+ModifyEditor.layout = null
+export default ModifyEditor

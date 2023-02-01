@@ -1,7 +1,7 @@
 import { useStore } from '@/store'
 import { IArticle } from '@/utils'
 import Prisma from '@/utils/prisma'
-import { Container, Row, Text, User } from '@nextui-org/react'
+import { Container, Link, Row, Text, User } from '@nextui-org/react'
 import { format } from 'date-fns'
 
 // 转换md格式，并高亮代码 需要引入css
@@ -70,7 +70,7 @@ const ArticleDetail = (props: IProps) => {
       <Text size={40} css={{ fontWeight: 'bloder' }}>
         {article.title}
       </Text>
-      <Row>
+      <Row align="flex-end">
         <User
           src={avatar}
           name={nickname}
@@ -79,6 +79,9 @@ const ArticleDetail = (props: IProps) => {
             'yyyy-MM-dd hh:mm:ss'
           )}  阅读 ${article.views}`}
         />
+        <Link color="primary" href={`/editor/${article?.id}`}>
+          update
+        </Link>
       </Row>
       {/* react 渲染字符串 */}
       <div
