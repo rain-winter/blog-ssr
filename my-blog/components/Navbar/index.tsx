@@ -62,8 +62,8 @@ const Navbar: NextPage = () => {
 
   return (
     <div>
-      <NextNavBar>
-        <NextNavBar.Content variant="underline">
+      <NextNavBar  variant="sticky" disableShadow>
+        <NextNavBar.Content >
           <Text b color="inherit">
             RAIN
           </Text>
@@ -80,7 +80,7 @@ const Navbar: NextPage = () => {
           ))}
         </NextNavBar.Content>
         <NextNavBar.Content>
-          <Button color="gradient" auto onClick={goEditorPage}>
+          <Button flat color="primary" auto onClick={goEditorPage}>
             写文章
           </Button>
           {id ? (

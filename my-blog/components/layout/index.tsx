@@ -1,15 +1,15 @@
+import { Container } from '@nextui-org/react'
 import type { NextPage } from 'next'
-import type { ReactElement } from 'react'
 import Footer from '../Footer'
 import Navbar from '../Navbar'
 
 const Layout: NextPage = ({ children }: any) => {
   return (
-    <div>
+    <Container fluid>
       <Navbar />
       <main>{children}</main>
       <Footer />
-    </div>
+    </Container>
   )
 }
 

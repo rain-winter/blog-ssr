@@ -27,25 +27,21 @@ export default function App<ReactWith>({
     // * === 能出来
     // 判断组件的layout 有就渲染header footer
     // console.log(typeof Component.layout)
-    if (Component.layout === null) {
-      return <Component {...pageProps} />
-    } else {
-      return (
-        // ts-ignore
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      )
-    }
+    // if (Component.layout === null) {
+    //   return <Component {...pageProps} />
+    // } else {
+    return (
+      // ts-ignore
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    )
+    // }
   }
 
   return (
     <StoreProvider initialValue={initialValue}>
-      <NextUIProvider>
-        {/* <Container fluid> */}
-        {renderLayout()}
-        {/* </Container> */}
-      </NextUIProvider>
+      <NextUIProvider>{renderLayout()}</NextUIProvider>
     </StoreProvider>
   )
 }

@@ -2,7 +2,7 @@ import { IArticle } from '@/utils'
 import api from '@/utils/api'
 import http from '@/utils/http'
 import Prisma from '@/utils/prisma'
-import { Container, Input } from '@nextui-org/react'
+import { Input } from '@nextui-org/react'
 import '@uiw/react-markdown-preview/markdown.css'
 import '@uiw/react-md-editor/markdown-editor.css'
 import dynamic from 'next/dynamic'
@@ -66,7 +66,7 @@ const ModifyEditor: { ({ article }: IProps): JSX.Element; layout: any } = ({
   }
 
   return (
-    <Container fluid>
+    <div>
       <Input
         fullWidth
         clearable
@@ -90,7 +90,7 @@ const ModifyEditor: { ({ article }: IProps): JSX.Element; layout: any } = ({
         }
       />
       <MDEditor height={600} value={value} onChange={setValue} />
-    </Container>
+    </div>
   )
 }
 // 配置为 null 不显示header footer 在_app里判断

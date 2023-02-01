@@ -1,7 +1,7 @@
 import { useStore } from '@/store'
 import { IArticle } from '@/utils'
 import Prisma from '@/utils/prisma'
-import { Container, Link, Row, Text, User } from '@nextui-org/react'
+import { Link, Row, Text, User } from '@nextui-org/react'
 import { format } from 'date-fns'
 
 // 转换md格式，并高亮代码 需要引入css
@@ -19,6 +19,7 @@ const prisma = new Prisma()
 interface IProps {
   article: IArticle
 }
+// TODO  SSR 渲染
 /**
  * SSR 渲染 控制台输出
  * @param params 接受动态参数 { id: 2 }
@@ -39,7 +40,6 @@ export async function getServerSideProps({ params }: { params: any }) {
     where: {
       id: +params.id,
     },
-
     include: {
       User: true,
     },
@@ -62,11 +62,12 @@ const ArticleDetail = (props: IProps) => {
   } = article
 
   const store = useStore()
-  // const userInfo = store?.user?.userInfo
-  // console.log(userInfo)
+  const userInfo = JSON.parse(store?.user?.userInfo)
+  console.log(userInfo)
+  console.log(id)
   // 本人写的跳转到编辑页
   return (
-    <Container fluid>
+    <div>
       <Text size={40} css={{ fontWeight: 'bloder' }}>
         {article.title}
       </Text>
@@ -79,15 +80,17 @@ const ArticleDetail = (props: IProps) => {
             'yyyy-MM-dd hh:mm:ss'
           )}  阅读 ${article.views}`}
         />
-        <Link color="primary" href={`/editor/${article?.id}`}>
-          update
-        </Link>
+        {id === userInfo.id ? (
+          <Link color="primary" href={`/editor/${article?.id}`}>
+            update
+          </Link>
+        ) : null}
       </Row>
       {/* react 渲染字符串 */}
       <div
         dangerouslySetInnerHTML={{ __html: md.render(article.content) }}
       ></div>
-    </Container>
+    </div>
   )
 }
 

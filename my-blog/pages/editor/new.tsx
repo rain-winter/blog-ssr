@@ -1,6 +1,6 @@
 import api from '@/utils/api'
 import http from '@/utils/http'
-import { Button, Container, Input } from '@nextui-org/react'
+import { Button, Input } from '@nextui-org/react'
 import '@uiw/react-markdown-preview/markdown.css'
 import '@uiw/react-md-editor/markdown-editor.css'
 import dynamic from 'next/dynamic'
@@ -29,10 +29,15 @@ const NewEditor: { (): JSX.Element; layout: any } = () => {
   }
 
   return (
-    <Container fluid>
-      <Button flat color="primary" auto css={{
-        margin:'10px 0'
-      }}>
+    <div>
+      <Button
+        flat
+        color="primary"
+        auto
+        css={{
+          margin: '10px 0',
+        }}
+      >
         添加文章
       </Button>
       <Input
@@ -57,7 +62,7 @@ const NewEditor: { (): JSX.Element; layout: any } = () => {
         }
       />
       <MDEditor height={600} value={value} onChange={setValue} />
-    </Container>
+    </div>
   )
 }
 // 配置为 null 不显示header footer 在_app里判断
