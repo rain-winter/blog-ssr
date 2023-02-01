@@ -2,8 +2,6 @@ import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { Key } from 'react'
 
-type SelectionType = 'all' | Set<Key>
-
 import { useStore } from '@/store'
 import api from '@/utils/api'
 import http from '@/utils/http'
@@ -23,12 +21,9 @@ const Navbar: NextPage = () => {
   const store = useStore()
   let { userInfo } = store.user
 
-  // let id, avatar, nickname
   const { pathname, push } = useRouter()
   const [isShowLogin, setIsShowLogin] = useState(false)
   const { id, avatar, nickname } = JSON.parse(userInfo || '{}')
-  console.log('----------------')
-  console.log(avatar)
 
   const handleLogin = () => {
     setIsShowLogin(true)
@@ -62,12 +57,8 @@ const Navbar: NextPage = () => {
 
   return (
     <div>
-      <NextNavBar  variant="sticky" disableShadow>
-        <NextNavBar.Content >
-          <Text b color="inherit">
-            RAIN
-          </Text>
-
+      <NextNavBar variant="sticky" disableShadow>
+        <NextNavBar.Content>
           {navs?.map((item) => (
             <NextNavBar.Link
               hideIn={'xs'}
@@ -86,10 +77,7 @@ const Navbar: NextPage = () => {
           {id ? (
             <Dropdown placement="bottom-left">
               <Dropdown.Trigger>
-                <User
-                  src={avatar}
-                  name={nickname}
-                />
+                <User src={avatar} name={nickname} />
               </Dropdown.Trigger>
               <Dropdown.Menu
                 color="primary"

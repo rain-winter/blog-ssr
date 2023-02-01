@@ -12,11 +12,11 @@ const ListItem = (props: IProps) => {
   const { article } = props
   // * 使用 Link 跳转
   return (
-    <Link href={`/article/${article.id}`}>
-      <Card variant="bordered" css={{ marginTop: '$10', cursor: 'pointer' }}>
+     <Link href={`/article/${article.id}`}>
+      <Card css={{ margin: '$10 0', cursor: 'pointer',width:'320px' }}>
         <Card.Header css={{ fontWeight: 'bold' }}>{article.title}</Card.Header>
         <Card.Body>
-          <Row justify="space-between">
+          <Row justify="space-between" align='center'>
             <Text
               css={{
                 overflow: 'hidden',

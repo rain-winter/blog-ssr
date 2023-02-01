@@ -1,6 +1,6 @@
-import type { NextPage } from 'next'
-import Prisma from '@/utils/prisma'
 import ListItem from '@/components/ListItem'
+import Prisma from '@/utils/prisma'
+import { Grid } from '@nextui-org/react'
 const prisma = new Prisma()
 /**
  * ssr 给服务端渲染
@@ -30,13 +30,16 @@ export async function getServerSideProps() {
 }
 const Home = ({ articles }: IProps) => {
   return (
-    <div>
-      {articles.map((article,index) => (
-        <ListItem key={index} article={article} />
+    <Grid.Container gap={1}  >
+      {articles.map((article, index) => (
+        <Grid  key={index} >
+          <ListItem key={index} article={article} />
+        </Grid>
       ))}
-    </div>
+    </Grid.Container>
   )
 }
+
 
 // 这样导出才会默认指向 /
 export default Home
