@@ -15,6 +15,7 @@ export type Tag = {
   icon: string
   follow_count: number
   article_count: number
+  users: User[]
 }
 
 export type IArticle = {

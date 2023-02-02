@@ -1,4 +1,3 @@
-import styled from '@emotion/styled'
 import { Container } from '@nextui-org/react'
 import type { NextPage } from 'next'
 import Footer from '../Footer'
@@ -11,22 +10,19 @@ import Navbar from '../Navbar'
  */
 const Layout: NextPage = ({ children }: any) => {
   return (
-    <Container
-      css={{
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+    <Container>
       <Navbar />
-      <Main>{children}</Main>
+      <main
+        style={{
+          height: 'calc(100vh - 116px)',
+        }}
+      >
+        {children}
+      </main>
       <Footer />
     </Container>
   )
 }
-const Main = styled.div({
-  flex: 1,
-})
 
 // 这样导出才会默认指向 /
 export default Layout

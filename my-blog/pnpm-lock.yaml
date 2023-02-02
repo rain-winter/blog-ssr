@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@ant-design/icons': ^5.0.1
   '@emotion/react': ^11.10.5
   '@emotion/styled': ^11.10.5
   '@next/font': 13.1.5
@@ -42,6 +43,7 @@ specifiers:
   typescript: 4.9.4
 
 dependencies:
+  '@ant-design/icons': 5.0.1_biqbaboplfbrettd7655fr4n2y
   '@emotion/react': 11.10.5_3stiutgnnbnfnf3uowm5cip22i
   '@emotion/styled': 11.10.5_jrh5enlbqfbnumycmktdqgd6se
   '@next/font': 13.1.5
