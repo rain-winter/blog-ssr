@@ -28,7 +28,6 @@ async function get(request: NextApiRequest, response: NextApiResponse) {
     },
   })
 
-  console.log(followTags)
 
   //   const res = await prisma.user.create({
   //     data: {

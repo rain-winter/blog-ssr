@@ -11,7 +11,7 @@ http.interceptors.request.use(
 
 http.interceptors.response.use(
   (res) => {
-    if (res.status === 200) {
+    if (res.data.code === 200) {
       return res?.data
     } else {
       message.error('http error')

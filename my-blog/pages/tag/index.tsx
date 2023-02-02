@@ -4,15 +4,15 @@ import http from '@/utils/http'
 // 用于渲染图标
 // import * as ANTD_ICONS from '@ant-design/icons'
 import { createFromIconfontCN } from '@ant-design/icons'
-import { Button, Tabs, TabsProps } from 'antd'
+import { Button, message, Tabs, TabsProps } from 'antd'
 import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
 import styles from './index.module.scss'
 
 // TODO 使用iconfont字体库图标
 const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_3221129_um5wbhqwt3.js',
-});
+  scriptUrl: '//at.alicdn.com/t/c/font_3221129_b94ya67u9t7.js',
+})
 
 const TabContent = (row: any) => {
   const { data } = row
@@ -23,17 +23,20 @@ const TabContent = (row: any) => {
    * 取关
    * @param id
    */
-  function handleUnFollow(id: number): void {
-    throw new Error('Function not implemented.')
+  async function handleUnFollow(tagid: number) {
+    let res = await http.post(api.follow, { type: 'unfollow', tagid })
+    message.info('取关成功')
+    location.reload()
   }
 
   /**
    * 关注
    * @param id
    */
-  function handleFollow(id: number): void {
-    console.log(id)
-    http.post('')
+  async function handleFollow(tagid: number) {
+    let res = await http.post(api.follow, { type: 'follow', tagid })
+    message.info('关注成功')
+    location.reload()
   }
   return (
     <div className={styles.tags}>
@@ -57,7 +60,7 @@ const TabContent = (row: any) => {
               color="primary"
               onClick={() => handleFollow(tag?.id)}
             >
-              关注
+              +关注
             </Button>
           )}
 

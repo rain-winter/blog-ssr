@@ -7,5 +7,5 @@ export default {
   update: '/article/update',
   // 标签
   getTag: '/tag/get',
-  follew: '/tag/follow',
+  follow: '/tag/follow',
 }
