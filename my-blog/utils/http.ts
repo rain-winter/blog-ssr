@@ -1,5 +1,5 @@
+import { message } from 'antd'
 import axios from 'axios'
-
 const http = axios.create({
   baseURL: '/',
 })
@@ -14,10 +14,8 @@ http.interceptors.response.use(
     if (res.status === 200) {
       return res?.data
     } else {
-      return {
-        code: -1,
-        msg: '未知错误----来自http.ts',
-      }
+      message.error('http error')
+      console.log(res)
     }
   },
   (err) => {

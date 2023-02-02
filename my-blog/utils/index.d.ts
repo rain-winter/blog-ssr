@@ -9,6 +9,14 @@ export type User = {
   avatar?: string
 }
 
+export type Tag = {
+  id: number
+  title: string
+  icon: string
+  follow_count: number
+  article_count: number
+}
+
 export type IArticle = {
   id: number
   title: string

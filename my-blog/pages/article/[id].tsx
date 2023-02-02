@@ -1,7 +1,7 @@
 import { useStore } from '@/store'
 import { IArticle } from '@/utils'
 import Prisma from '@/utils/prisma'
-import { Link, Row, Text, User } from '@nextui-org/react'
+import { Link, Row, Text, Textarea, User } from '@nextui-org/react'
 import { format } from 'date-fns'
 
 // 转换md格式，并高亮代码 需要引入css
@@ -90,6 +90,11 @@ const ArticleDetail = (props: IProps) => {
       <div
         dangerouslySetInnerHTML={{ __html: md.render(article.content) }}
       ></div>
+      {/* 评论 */}
+      <Textarea
+        label="评论"
+        placeholder="Enter your amazing ideas."
+      />
     </div>
   )
 }

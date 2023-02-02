@@ -56,8 +56,8 @@ const Navbar: NextPage = () => {
   }
 
   return (
-    <div>
-      <NextNavBar variant="sticky" disableShadow>
+    <div >
+      <NextNavBar variant={"sticky"} disableShadow>
         <NextNavBar.Content>
           {navs?.map((item) => (
             <NextNavBar.Link
