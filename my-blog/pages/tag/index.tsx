@@ -1,12 +1,18 @@
 import { useStore } from '@/store'
 import api from '@/utils/api'
 import http from '@/utils/http'
-import * as ANTD_ICONS from '@ant-design/icons'
+// 用于渲染图标
+// import * as ANTD_ICONS from '@ant-design/icons'
+import { createFromIconfontCN } from '@ant-design/icons'
 import { Button, Tabs, TabsProps } from 'antd'
 import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
 import styles from './index.module.scss'
 
+// TODO 使用iconfont字体库图标
+const IconFont = createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/c/font_3221129_um5wbhqwt3.js',
+});
 
 const TabContent = (row: any) => {
   const { data } = row
@@ -26,13 +32,16 @@ const TabContent = (row: any) => {
    * @param id
    */
   function handleFollow(id: number): void {
-    throw new Error('Function not implemented.')
+    console.log(id)
+    http.post('')
   }
   return (
     <div className={styles.tags}>
       {followOrAll?.map((tag: any) => (
         <div key={tag?.title} className={styles.tagWrapper}>
-          <div>{(ANTD_ICONS as any)[tag?.icon]?.render()}</div>
+          {/* TODO 渲染 图标 */}
+          {/* <div>{(ANTD_ICONS as any)[tag?.icon]?.render()}</div> */}
+          <IconFont type={tag?.icon} />
           <div className={styles.title}>{tag.title}</div>
           <div>
             {tag?.follow_count} 有 {tag?.article_count || 0} 篇文章

@@ -1,15 +1,17 @@
 import { oauthOptions } from '@/config'
 import { useStore } from '@/store'
 import api from '@/utils/api'
+import http from '@/utils/http'
 import {
   Button, Checkbox, Input, Link,
   Modal, Row, Text
 } from '@nextui-org/react'
+import { message } from 'antd'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import http from 'utils/http'
 import CountDown from '../CountDown'
+
 
 interface Props {
   isShow: boolean
@@ -18,7 +20,7 @@ interface Props {
 
 const Login = ({ isShow, handleClose }: Props) => {
   const store = useStore()
-  const router =useRouter()
+  const router = useRouter()
 
   const form = {
     phone: '',
@@ -52,11 +54,12 @@ const Login = ({ isShow, handleClose }: Props) => {
    */
   const handleVerifyCode = () => {
     if (form.phone == '') {
-      alert('手机号不能为空')
+      message.info('nihao')
+      alert('手机号为空')
       return
     }
     http
-      .post('/api/user/sendVerifyCode', {
+      .post(api.sendVerifyCode, {
         to: form?.phone,
         templateId: 1,
       })
@@ -127,7 +130,9 @@ const Login = ({ isShow, handleClose }: Props) => {
           <Text size={14}>Forgot password?</Text>
         </Row>
         <Row>
-          <Text color="primary" onClick={handleOAuthGithub}>使用GitHub登录</Text>
+          <Text color="primary" onClick={handleOAuthGithub}>
+            使用GitHub登录
+          </Text>
         </Row>
         <Row>
           <Text size="$xs">注册登录即表示同意</Text>

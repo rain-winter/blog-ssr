@@ -1,9 +1,11 @@
 export default {
-  login: '/api/user/login',
-  logout: '/api/user/logout',
+  sendVerifyCode: '/user/sendVerifyCode',
+  login: '/user/login',
+  logout: '/user/logout',
   // 文章
-  publish: '/api/article/publish',
-  update: '/api/article/update',
+  publish: '/article/publish',
+  update: '/article/update',
   // 标签
-  getTag: '/api/tag/get',
+  getTag: '/tag/get',
+  follew: '/tag/follow',
 }

@@ -1,7 +1,7 @@
 import { message } from 'antd'
 import axios from 'axios'
 const http = axios.create({
-  baseURL: '/',
+  baseURL: '/api',
 })
 //
 http.interceptors.request.use(
