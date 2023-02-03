@@ -34,6 +34,9 @@ const Profile: NextPage = () => {
         form={form}
         onFinish={handleSubmit}
       >
+        <Form.Item label="用户名" name="avatar">
+          <Input placeholder="请输入头像的地址" />
+        </Form.Item>
         <Form.Item label="用户名" name="nickname">
           <Input placeholder="请输入用户名" />
         </Form.Item>

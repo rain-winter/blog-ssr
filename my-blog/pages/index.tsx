@@ -28,18 +28,26 @@ export async function getServerSideProps() {
     },
   }
 }
+
+// export default function Page() {
+//   return {}
+// }
+
+// Page.getLayout = function getLayout(page: ReactElement) {
+//   return <Layout>{page}</Layout>
+// }
+
 const Home = ({ articles }: IProps) => {
   return (
-    <Grid.Container gap={1} justify='center' alignItems='center'>
+    <Grid.Container gap={1} justify="center" alignItems="center">
       {articles.map((article, index) => (
-        <Grid css={{width:'320px'}} key={index} >
-          <ListItem  key={index} article={article} />
+        <Grid css={{ width: '320px' }} key={index}>
+          <ListItem key={index} article={article} />
         </Grid>
       ))}
     </Grid.Container>
   )
 }
 
-
-// 这样导出才会默认指向 /
+//// 这样导出才会默认指向 
 export default Home

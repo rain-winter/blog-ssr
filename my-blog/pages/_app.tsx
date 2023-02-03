@@ -1,12 +1,12 @@
-import Layout from '@/components/layout';
-import { StoreProvider } from '@/store';
-import '@/styles/globals.css';
-import type { NextPage } from 'next';
-import type { AppProps } from 'next/app';
-import type { ReactElement, ReactNode } from 'react';
+import Layout from '@/components/layout'
+import { StoreProvider } from '@/store'
+import '@/styles/globals.css'
+import { NextUIProvider } from '@nextui-org/react'
+import type { NextPage } from 'next'
+import type { AppProps } from 'next/app'
+import type { ReactElement, ReactNode } from 'react'
 
 // 1. import `NextUIProvider` component
-import { NextUIProvider } from '@nextui-org/react';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -14,13 +14,16 @@ type NextPageWithLayout = NextPage & {
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
+  initialValue: any
 }
 
-export default function App<ReactWith>({
+export default function App({
   initialValue,
   Component,
   pageProps,
-}: any) {
+}: AppPropsWithLayout) {
+ 
+
   // Use the layout defined at the page level, if available
   const renderLayout = () => {
     // * === 能出来
@@ -30,7 +33,7 @@ export default function App<ReactWith>({
     //   return <Component {...pageProps} />
     // } else {
     return (
-      // ts-ignore
+
       <Layout>
         <Component {...pageProps} />
       </Layout>
@@ -39,9 +42,9 @@ export default function App<ReactWith>({
   }
 
   return (
-    <StoreProvider initialValue={initialValue}>
-      <NextUIProvider>{renderLayout()}</NextUIProvider>
-    </StoreProvider>
+  <StoreProvider initialValue={initialValue}>
+    <NextUIProvider>{renderLayout()}</NextUIProvider>
+  </StoreProvider>
   )
 }
 

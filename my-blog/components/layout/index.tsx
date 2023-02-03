@@ -1,14 +1,18 @@
 import styled from '@emotion/styled'
 import { Container } from '@nextui-org/react'
-import type { NextPage } from 'next'
 import Navbar from '../Navbar'
+
+interface Props {
+  children: any
+}
 
 /**
  * Layout布局
  * @param param0 children 子组件
  * @returns
  */
-const Layout: NextPage = ({ children }: any) => {
+const Layout = (props: Props) => {
+  const { children } = props
   return (
     <Container>
       <Navbar />

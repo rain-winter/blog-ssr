@@ -1,11 +1,11 @@
 import { ironOption, oauthOptions } from '@/config'
+import { ISession } from '@/utils'
+import { setCookie } from '@/utils/func'
+import http from '@/utils/http'
+import Prisma from '@/utils/prisma'
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { NextApiRequest, NextApiResponse } from 'next'
-import Prisma from '@/utils/prisma'
-import { ISession } from '@/utils'
-import http from '@/utils/http'
 import { Cookie } from 'next-cookie'
-import { setCookie } from '@/utils/func'
 
 export default withIronSessionApiRoute(redirect, ironOption)
 
@@ -92,11 +92,11 @@ async function redirect(request: NextApiRequest, response: NextApiResponse) {
         // 同时创建 userauth表
         userAuths: {
           create: [
-            {
-              identifier: githubClientID,
-              identity_type: 'github',
-              credential: access_token,
-            },
+            // {
+            //   identifier: githubClientID,
+            //   identity_type: 'github',
+            //   credential: access_token,
+            // },
           ],
         },
       },

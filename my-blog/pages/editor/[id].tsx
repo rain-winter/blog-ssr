@@ -65,6 +65,10 @@ const ModifyEditor: { ({ article }: IProps): JSX.Element; layout: any } = ({
     articleId ? push(`/article/${articleId}`) : push('/')
   }
 
+  const handleContentChange = (content:any) => {
+    setValue(content)
+  }
+
   return (
     <div>
       <Input
@@ -89,7 +93,7 @@ const ModifyEditor: { ({ article }: IProps): JSX.Element; layout: any } = ({
           </SendButton>
         }
       />
-      <MDEditor height={600} value={value} onChange={setValue} />
+      <MDEditor height={600} value={value} onChange={handleContentChange} />
     </div>
   )
 }

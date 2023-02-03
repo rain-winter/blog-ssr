@@ -19,7 +19,7 @@ import { navs } from './config'
 
 const Navbar: NextPage = () => {
   const store = useStore()
-  let { userInfo } = store.user
+  let { userInfo } = store?.user || '{}'
 
   const { pathname, push } = useRouter()
   const [isShowLogin, setIsShowLogin] = useState(false)

@@ -3,15 +3,19 @@ import { useStore } from '@/store'
 import api from '@/utils/api'
 import http from '@/utils/http'
 import {
-  Button, Checkbox, Input, Link,
-  Modal, Row, Text
+  Button,
+  Checkbox,
+  Input,
+  Link,
+  Modal,
+  Row,
+  Text
 } from '@nextui-org/react'
 import { message } from 'antd'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import CountDown from '../CountDown'
-
 
 interface Props {
   isShow: boolean
@@ -22,10 +26,11 @@ const Login = ({ isShow, handleClose }: Props) => {
   const store = useStore()
   const router = useRouter()
 
-  const form = {
+  const [form, setForm] = useState({
     phone: '',
     verify: '',
-  }
+  })
+
   const [isShowVerfifyCode, setIsShowVerfifyCode] = useState(false)
   /**
    * Auth2.0
@@ -53,8 +58,12 @@ const Login = ({ isShow, handleClose }: Props) => {
    */
   const handleVerifyCode = () => {
     if (form.phone == '') {
-      message.info('nihao')
-      alert('手机号为空')
+      message.info('手机号不能为空')
+      return
+    }
+    const regExp = new RegExp('^1[3578]\\d{9}$')
+    if (!regExp.test(form.phone)) {
+      message.error('请输入11位手机号')
       return
     }
     http
@@ -64,6 +73,7 @@ const Login = ({ isShow, handleClose }: Props) => {
       })
       .then((res) => {
         setIsShowVerfifyCode(true)
+        setForm({ ...form, verify: res.data })
       })
   }
   /**
@@ -88,6 +98,7 @@ const Login = ({ isShow, handleClose }: Props) => {
       </Modal.Header>
       <Modal.Body css={{ paddingTop: '26px' }}>
         <Input
+          required={true}
           clearable
           bordered
           fullWidth
@@ -95,11 +106,12 @@ const Login = ({ isShow, handleClose }: Props) => {
           size="lg"
           labelPlaceholder="phone"
           type="text"
-          onBlur={(e) => (form.phone = e.target.value)}
+          onChange={(e) => setForm({ ...form, phone: e.target.value })}
         />
         <Row align="center" justify="space-between">
           <Input
             css={{ marginTop: '20px' }}
+            value={form.verify}
             clearable
             contentRightStyling={false}
             contentClickable={true}
@@ -109,7 +121,7 @@ const Login = ({ isShow, handleClose }: Props) => {
             type="text"
             color="primary"
             labelPlaceholder="verify"
-            onBlur={(e) => (form.verify = e.target.value)}
+            onChange={(e) => setForm({ ...form, verify: e.target.value })}
             contentRight={
               isShowVerfifyCode ? (
                 <CountDown time={10} onEnd={countDownEnd} />
@@ -129,7 +141,7 @@ const Login = ({ isShow, handleClose }: Props) => {
         </Row>
         <Row>
           <Text color="primary" onClick={handleOAuthGithub}>
-            使用GitHub登录
+            {/* 使用GitHub登录 */}
           </Text>
         </Row>
         <Row>

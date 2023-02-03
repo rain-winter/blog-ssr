@@ -16,7 +16,7 @@ async function update(request: NextApiRequest, response: NextApiResponse) {
   const cookie = Cookie.fromApiRoute(request, response)
 
   const { id: userId } = session.user
-  const { nickname = '', job = '', introduce = '' } = request.body
+  const { nickname = '', job = '', introduce = '',avatar } = request.body
 
   const user = await prisma.user.findFirst({
     where: {
@@ -29,6 +29,7 @@ async function update(request: NextApiRequest, response: NextApiResponse) {
         id: +userId,
       },
       data: {
+        avatar,
         nickname,
         job,
         introduce,
