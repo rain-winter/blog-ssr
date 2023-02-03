@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { Tag } from '@/utils'
 import api from '@/utils/api'
+import { IconFont } from '@/utils/func'
 import http from '@/utils/http'
 import Prisma from '@/utils/prisma'
 import { Input } from '@nextui-org/react'
@@ -10,8 +11,6 @@ import { Select } from 'antd'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { SendButton } from './icon/SendButton'
-import { SendIcon } from './icon/SendIcon'
 const prisma = new Prisma()
 
 /**
@@ -77,16 +76,7 @@ const NewEditor = ({ tags }: { tags: Tag[] }) => {
         onChange={(e) => setTitle(e.target.value)}
         onContentClick={handlePublish}
         contentRight={
-          <SendButton>
-            <SendIcon
-              filled={undefined}
-              size={undefined}
-              height={undefined}
-              width={undefined}
-              label={undefined}
-              className={undefined}
-            />
-          </SendButton>
+         <IconFont type='icon-fabu1'/>
         }
       />
       <Select

@@ -1,5 +1,6 @@
 import { IArticle } from '@/utils'
 import api from '@/utils/api'
+import { IconFont } from '@/utils/func'
 import http from '@/utils/http'
 import Prisma from '@/utils/prisma'
 import { Input } from '@nextui-org/react'
@@ -8,8 +9,6 @@ import '@uiw/react-md-editor/markdown-editor.css'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { SendButton } from './icon/SendButton'
-import { SendIcon } from './icon/SendIcon'
 const prisma = new Prisma()
 
 interface IProps {
@@ -81,16 +80,7 @@ const ModifyEditor: { ({ article }: IProps): JSX.Element; layout: any } = ({
         onContentClick={handleUpdate}
         value={title}
         contentRight={
-          <SendButton>
-            <SendIcon
-              filled={undefined}
-              size={undefined}
-              height={undefined}
-              width={undefined}
-              label={undefined}
-              className={undefined}
-            />
-          </SendButton>
+          <IconFont type='icon-fabu1'/>
         }
       />
       <MDEditor height={600} value={value} onChange={handleContentChange} />
