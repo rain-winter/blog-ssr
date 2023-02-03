@@ -9,8 +9,10 @@ export const setCookie = (cookies: any, params: unknown) => {
   const path = '/'
   cookies.set('TomasUser', JSON.stringify(params), { expires, path })
 }
+
+
 // TODO 使用iconfont字体库图标
 import { createFromIconfontCN } from '@ant-design/icons'
 export const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_3221129_3bl91g0xbat.js',
+  scriptUrl: '//at.alicdn.com/t/c/font_3221129_c77luf7etk.js',
 })

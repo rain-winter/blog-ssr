@@ -42,7 +42,6 @@ const Login = ({ isShow, handleClose }: Props) => {
    */
   const handleLogin = () => {
     http.post(api.login, { ...form, identity_type: 'phone' }).then((res) => {
-      console.log(res)
       store.user.setUserInfo(res.data.User)
       setIsShowVerfifyCode(false)
       location.reload()
@@ -65,7 +64,6 @@ const Login = ({ isShow, handleClose }: Props) => {
       })
       .then((res) => {
         setIsShowVerfifyCode(true)
-        console.log(res)
       })
   }
   /**

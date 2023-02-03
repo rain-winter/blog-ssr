@@ -42,7 +42,7 @@ const TabContent = (row: any) => {
           <IconFont type={tag?.icon} />
           <div className={styles.title}>{tag.title}</div>
           <div>
-            {tag?.follow_count} 有 {tag?.article_count || 0} 篇文章
+             有 {tag?.article_count || 0} 篇文章
           </div>
 
           {tag?.users?.find(

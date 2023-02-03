@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import { Container } from '@nextui-org/react'
 import type { NextPage } from 'next'
-import Footer from '../Footer'
 import Navbar from '../Navbar'
 
 /**
@@ -14,14 +13,14 @@ const Layout: NextPage = ({ children }: any) => {
     <Container>
       <Navbar />
       <Main>{children}</Main>
-      <Footer />
+      {/* <Footer /> */}
     </Container>
   )
 }
 
 const Main = styled.div`
   width: 100%;
-  height: calc(100vh - 116px);
+  height: calc(100vh - 76px);
   overflow-y: scroll;
   overflow-x: scroll;
   &::-webkit-scrollbar {

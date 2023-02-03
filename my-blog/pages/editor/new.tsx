@@ -21,7 +21,6 @@ const prisma = new Prisma()
 export async function getServerSideProps() {
   // 获取文章
   let tags = await prisma.tag.findMany()
-  console.log(tags)
   //   返回个 props 在下面可以用
   return {
     props: {

@@ -63,8 +63,7 @@ const ArticleDetail = (props: IProps) => {
 
   const store = useStore()
   const userInfo = JSON.parse(store?.user?.userInfo)
-  console.log(userInfo)
-  console.log(id)
+
   // 本人写的跳转到编辑页
   return (
     <div>

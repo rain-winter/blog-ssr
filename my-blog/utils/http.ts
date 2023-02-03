@@ -19,7 +19,8 @@ http.interceptors.response.use(
     }
   },
   (err) => {
-    console.log(err)
+    message.error('http error')
+    return Promise.reject(err.message)
   }
 )
 
