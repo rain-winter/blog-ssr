@@ -1,18 +1,13 @@
 import { useStore } from '@/store'
 import api from '@/utils/api'
+import { IconFont } from '@/utils/func'
 import http from '@/utils/http'
 // 用于渲染图标
 // import * as ANTD_ICONS from '@ant-design/icons'
-import { createFromIconfontCN } from '@ant-design/icons'
 import { Button, message, Tabs, TabsProps } from 'antd'
 import type { NextPage } from 'next'
 import { useEffect, useState } from 'react'
 import styles from './index.module.scss'
-
-// TODO 使用iconfont字体库图标
-const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_3221129_b94ya67u9t7.js',
-})
 
 const TabContent = (row: any) => {
   const { data } = row

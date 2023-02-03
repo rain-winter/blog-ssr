@@ -12,11 +12,11 @@ const ListItem = (props: IProps) => {
   const { article } = props
   // * 使用 Link 跳转
   return (
-     <Link href={`/article/${article.id}`}>
-      <Card css={{  cursor: 'pointer',width:'320px' }}>
+    <Link href={`/article/${article.id}`}>
+      <Card css={{ cursor: 'pointer', margin: '20px 0 10px' }}>
         <Card.Header css={{ fontWeight: 'bold' }}>{article.title}</Card.Header>
         <Card.Body>
-          <Row justify="space-between" align='center'>
+          <Row justify="space-between" align="center">
             <Text
               css={{
                 overflow: 'hidden',
@@ -37,9 +37,9 @@ const ListItem = (props: IProps) => {
         <Card.Footer>
           <Row justify="space-between">
             <div>
-              <Text color="#999">阅览人数 : {article.views}</Text>
+              <Text size={'$xs'} color="#999">阅览人数 : {article.views}</Text>
             </div>
-            <Text color="#999">
+            <Text size={'$xs'} color="#999">
               {formatDistanceToNow(new Date(article.createdAt))}
             </Text>
           </Row>

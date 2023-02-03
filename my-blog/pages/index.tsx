@@ -32,8 +32,8 @@ const Home = ({ articles }: IProps) => {
   return (
     <Grid.Container gap={1} justify='center' alignItems='center'>
       {articles.map((article, index) => (
-        <Grid  key={index} >
-          <ListItem key={index} article={article} />
+        <Grid css={{width:'320px'}} key={index} >
+          <ListItem  key={index} article={article} />
         </Grid>
       ))}
     </Grid.Container>
