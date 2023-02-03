@@ -28,31 +28,6 @@ async function get(request: NextApiRequest, response: NextApiResponse) {
     },
   })
 
-
-  //   const res = await prisma.user.create({
-  //     data: {
-  //       nickname: 'rain',
-  //       userAuths: {
-  //         create: [
-  //           {
-  //             identifier: '0000',
-  //             identity_type: '0000',
-  //             credential: '000',
-  //           },
-  //         ],
-  //       },
-  //       tags: {
-  //         create: [
-  //           {
-  //             title: '0000',
-  //             icon: '000',
-  //           },
-  //         ],
-  //       },
-  //     },
-  //   })
-  //   console.log(res);
-
   /**
    * 获取所有标签
    */

@@ -41,8 +41,8 @@ model Tag {
   id            Int       @id @default(autoincrement())
   title         String
   icon          String
-  follow_count  Int?      @default(0)
-  article_count Int?      @default(0)
+  follow_count  Int       @default(0)
+  article_count Int       @default(0)
   users         User[]
   articles      Article[]
 }
