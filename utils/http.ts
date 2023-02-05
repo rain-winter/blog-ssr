@@ -14,12 +14,13 @@ http.interceptors.response.use(
     if (res.data.code === 200) {
       return res?.data
     } else {
-      message.error('http error')
       console.log(res)
+      message.error('http error')
     }
   },
   (err) => {
-    message.error('http error')
+    console.log(err)
+    message.error('http err error')
     return Promise.reject(err.message)
   }
 )

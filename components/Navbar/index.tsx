@@ -71,7 +71,7 @@ const Navbar: NextPage = () => {
           ))}
         </NextNavBar.Content>
         <NextNavBar.Content>
-          <Button flat color="primary" auto onClick={goEditorPage}>
+          <Button flat color="primary" auto onPress={goEditorPage}>
             写文章
           </Button>
           {id ? (

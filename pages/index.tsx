@@ -1,3 +1,4 @@
+// import Prisma from '@/utils/prisma'
 import ListItem from '@/components/ListItem'
 import Prisma from '@/utils/prisma'
 import { Grid } from '@nextui-org/react'

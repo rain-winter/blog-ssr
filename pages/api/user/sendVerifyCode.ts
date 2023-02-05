@@ -53,7 +53,7 @@ async function sendVerifyCode(req: NextApiRequest, response: NextApiResponse) {
 
   session.verifyCode = verifyCode
   console.log(verifyCode)
-  await req.session.save()
+  await session.save()
 
   response.status(200).json({
     code: 200,
